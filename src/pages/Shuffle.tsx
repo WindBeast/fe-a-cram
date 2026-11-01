@@ -122,9 +122,9 @@ export default function Shuffle() {
           </div>
 
           {item.kind === 'card' ? (
-            <FlipCard card={item.card} flipped={flipped} onFlip={() => setFlipped((f) => !f)} />
+            <FlipCard card={item.card} flipped={flipped} onFlip={() => setFlipped((f) => !f)} topicId={item.topicId} />
           ) : (
-            <QuizQuestion key={i} item={item.quiz} onAnswer={() => setAnswered(true)} />
+            <QuizQuestion key={i} item={item.quiz} onAnswer={() => setAnswered(true)} topicId={item.topicId} />
           )}
 
           <div className="shuffle-ctrl">

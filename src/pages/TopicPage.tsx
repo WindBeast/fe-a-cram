@@ -6,6 +6,7 @@ import type { Topic } from '../types';
 import { ReviewMark, ReviewNote, StatusPicker } from '../components/bits';
 import Flashcards from '../components/Flashcards';
 import Quiz from '../components/Quiz';
+import Txt, { abbrsIn } from '../components/Txt';
 
 const SECTIONS = [
   { id: 'summary', label: 'まとめ' },
@@ -51,6 +52,22 @@ export default function TopicPage({ id }: { id: string }) {
 
   return (
     <article className="topic">
+      <nav className="pager-top" aria-label="前後の小分類">
+        {prev ? (
+          <a href={href.topic(prev.id)} title={prev.name}>
+            ‹ {prev.name}
+          </a>
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <a href={href.topic(next.id)} title={next.name} className="pager-top-next">
+            {next.name} ›
+          </a>
+        ) : (
+          <span />
+        )}
+      </nav>
       <nav className="crumbs" aria-label="現在位置">
         <a href={href.home()}>{minor.field.name}</a>
         <span>›</span>
@@ -99,7 +116,9 @@ export default function TopicPage({ id }: { id: string }) {
             <h2>30秒まとめ</h2>
             <ul>
               {topic.summary.map((line, i) => (
-                <li key={i}>{line}</li>
+                <li key={i}>
+                  <Txt text={line} topicId={id} />
+                </li>
               ))}
             </ul>
           </section>
@@ -112,10 +131,10 @@ export default function TopicPage({ id }: { id: string }) {
               {topic.terms.map((t) => (
                 <div key={t.term} className="term">
                   <dt>
-                    {t.term} <ReviewMark item={t} />
+                    <Txt text={t.term} topicId={id} /> <ReviewMark item={t} />
                   </dt>
                   <dd>
-                    {t.desc}
+                    <Txt text={t.desc} topicId={id} skip={abbrsIn(t.term)} />
                     <ReviewNote item={t} />
                   </dd>
                 </div>
@@ -130,7 +149,7 @@ export default function TopicPage({ id }: { id: string }) {
                 <li key={i} className={`point point-${p.kind}`}>
                   <span className="point-tag">{p.kind === 'trap' ? 'ひっかけ' : '頻出'}</span>
                   <span>
-                    {p.text} <ReviewMark item={p} />
+                    <Txt text={p.text} topicId={id} /> <ReviewMark item={p} />
                     <ReviewNote item={p} />
                   </span>
                 </li>
@@ -142,14 +161,14 @@ export default function TopicPage({ id }: { id: string }) {
             <h2>
               フラッシュカード <span className="muted small">{topic.cards.length}</span>
             </h2>
-            <Flashcards cards={topic.cards} />
+            <Flashcards cards={topic.cards} topicId={id} />
           </section>
 
           <section id="quiz" className="sec">
             <h2>
               ミニ確認クイズ <span className="muted small">{topic.quiz.length}問</span>
             </h2>
-            <Quiz items={topic.quiz} />
+            <Quiz items={topic.quiz} topicId={id} />
           </section>
 
           {topic.updated && <p className="muted small updated">最終更新 {topic.updated}</p>}

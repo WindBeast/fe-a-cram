@@ -2,11 +2,11 @@
   "id": "09-3",
   "updated": "2026-11-01",
   "summary": [
-    "関係演算：条件に合う行を取り出す選択、列を取り出す射影、表をつなぐ結合。集合演算には和・差・積（共通部分）がある。",
-    "SQL は、表などを定義する DDL（CREATE、GRANT など）と、データを操作する DML（SELECT、INSERT、UPDATE、DELETE）に分かれる。",
-    "SELECT の基本形：SELECT 列 FROM 表 WHERE 行の条件 GROUP BY グループ化 HAVING グループの条件 ORDER BY 並べ替え。",
-    "WHERE は行を絞り、HAVING はグループ化した後のグループを絞る。集約関数（COUNT・SUM・AVG・MAX・MIN）の条件は HAVING に書く。",
-    "プログラムに埋め込んだ SQL で複数行の結果を1行ずつ処理するには、カーソルを使う（DECLARE → OPEN → FETCH → CLOSE）。"
+    "関係演算：選択＝行を取り出す（WHERE）、射影＝列を取り出す（SELECT の列指定）、結合＝共通の列で表をつなぐ。",
+    "SELECT 列 FROM 表 WHERE 行の条件 GROUP BY 列 HAVING グループの条件 ORDER BY 列。",
+    "WHERE＝グループ化する前の行を絞る、HAVING＝グループ化後のグループを絞る（集約関数の条件）。",
+    "BETWEEN a AND b＝a 以上 b 以下。LIKE の ％＝0文字以上の任意の文字列、_＝任意の1文字。COUNT(*) は NULL の行も数える。",
+    "DDL＝CREATE・DROP・GRANT、DML＝SELECT・INSERT・UPDATE・DELETE。カーソル＝複数行を1行ずつ処理（DECLARE → OPEN → FETCH → CLOSE）。"
   ],
   "terms": [
     { "term": "選択・射影・結合", "reading": "せんたく・しゃえい・けつごう", "desc": "関係演算の基本。選択は条件に合う行を取り出す、射影は指定した列を取り出す、結合は共通の列の値で複数の表をつなぐ。" },

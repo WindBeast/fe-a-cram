@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { QuizItem } from '../types';
 import QuizQuestion from './QuizQuestion';
 
-export default function Quiz({ items }: { items: QuizItem[] }) {
+export default function Quiz({ items, topicId }: { items: QuizItem[]; topicId?: string }) {
   const [round, setRound] = useState(0);
   const [results, setResults] = useState<Record<number, boolean>>({});
 
@@ -18,6 +18,7 @@ export default function Quiz({ items }: { items: QuizItem[] }) {
           key={`${round}-${i}`}
           item={item}
           label={`問${i + 1}`}
+          topicId={topicId}
           onAnswer={(ok) => setResults((r) => ({ ...r, [i]: ok }))}
         />
       ))}

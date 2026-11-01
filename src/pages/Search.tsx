@@ -3,6 +3,7 @@ import { loadAllTopics, minorById, minors } from '../data';
 import { href } from '../router';
 import type { Term, Topic } from '../types';
 import { ReviewMark } from '../components/bits';
+import Txt, { abbrsIn } from '../components/Txt';
 
 /** 全角半角・大小文字・カタカナひらがなの違いを吸収する */
 function norm(s: string): string {
@@ -95,10 +96,10 @@ export default function Search({ q: initial }: { q: string }) {
               {termHits.map((h) => (
                 <div key={h.topicId + h.term.term} className="term">
                   <dt>
-                    {h.term.term} <ReviewMark item={h.term} />
+                    <Txt text={h.term.term} topicId={h.topicId} /> <ReviewMark item={h.term} />
                   </dt>
                   <dd>
-                    {h.term.desc}
+                    <Txt text={h.term.desc} topicId={h.topicId} skip={abbrsIn(h.term.term)} />
                     <a className="term-src small" href={href.topic(h.topicId)}>
                       {minorById.get(h.topicId)?.name ?? h.topicId} ›
                     </a>

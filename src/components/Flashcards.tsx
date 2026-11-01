@@ -3,7 +3,7 @@ import type { Card } from '../types';
 import FlipCard from './FlipCard';
 import { shuffled } from './bits';
 
-export default function Flashcards({ cards }: { cards: Card[] }) {
+export default function Flashcards({ cards, topicId }: { cards: Card[]; topicId?: string }) {
   const [deck, setDeck] = useState(cards);
   const [i, setI] = useState(0);
   const [flipped, setFlipped] = useState(false);
@@ -17,7 +17,7 @@ export default function Flashcards({ cards }: { cards: Card[] }) {
 
   return (
     <div className="deck">
-      <FlipCard card={deck[i]} flipped={flipped} onFlip={() => setFlipped((f) => !f)} />
+      <FlipCard card={deck[i]} flipped={flipped} onFlip={() => setFlipped((f) => !f)} topicId={topicId} />
       <div className="deck-ctrl">
         <button className="btn" onClick={() => go(i - 1)} aria-label="前のカード">
           ‹ 前

@@ -113,6 +113,14 @@ code {
   color: var(--muted);
 }
 
+/* 略称に添える元の英語 */
+.abbr-full {
+  color: var(--muted);
+  font-size: 0.78em;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 .small {
   font-size: 0.82rem;
 }
@@ -547,6 +555,30 @@ code {
 }
 
 /* ---- 小分類ページ ---- */
+.pager-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pager-top a {
+  max-width: 48%;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pager-top-next {
+  margin-left: auto;
+}
+
 .crumbs {
   display: flex;
   flex-wrap: wrap;
